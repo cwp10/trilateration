@@ -1,0 +1,13 @@
+._*
+.DS_Store
+Desktop.ini
+
+/obj/
+/Temp/
+/Library/
+/*.csproj
+/*.sln
+/*.suo
+.vscode/
+
+*.apk
