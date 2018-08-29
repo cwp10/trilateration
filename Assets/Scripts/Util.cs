@@ -24,6 +24,17 @@ public class Util
 
 	public static Vector2 CalculateCoordiates(Vector2 b1Pos, Vector2 b2Pos, Vector2 b3Pos, float b1Radius, float b2Radius, float b3Radius)
 	{
+		float va = (Mathf.Pow(b3Pos.x, 2) - Mathf.Pow(b2Pos.x, 2) + Mathf.Pow(b3Pos.y, 2) - Mathf.Pow(b2Pos.y, 2) + Mathf.Pow(b2Radius, 2) - Mathf.Pow(b3Radius, 2)) / 2.0f;
+		float vb = (Mathf.Pow(b1Pos.x, 2) - Mathf.Pow(b2Pos.x, 2) + Mathf.Pow(b1Pos.y, 2) - Mathf.Pow(b2Pos.y, 2) + Mathf.Pow(b2Radius, 2) - Mathf.Pow(b1Radius, 2)) / 2.0f;
+
+		float y = ((vb * (b2Pos.x - b3Pos.x)) - (va * (b2Pos.x - b1Pos.x))) / (((b1Pos.y - b2Pos.y) * (b2Pos.x - b3Pos.x)) - ((b3Pos.y - b2Pos.y) * (b2Pos.x - b1Pos.x)));
+		float x = ((y * (b1Pos.y - b2Pos.y)) - vb) / (b2Pos.x - b1Pos.x);	
+				
+		return new Vector2(x, y);
+	}
+
+	public static Vector2 CalculateCoordiates2(Vector2 b1Pos, Vector2 b2Pos, Vector2 b3Pos, float b1Radius, float b2Radius, float b3Radius)
+	{
 		float va = ((b2Radius * b2Radius - b3Radius * b3Radius) - (b2Pos.x * b2Pos.x - b3Pos.x * b3Pos.x) - (b2Pos.y * b2Pos.y - b3Pos.y * b3Pos.y)) / 2.0f;
 		float vb = ((b2Radius * b2Radius - b1Radius * b1Radius) - (b2Pos.x * b2Pos.x - b1Pos.x * b1Pos.x) - (b2Pos.y * b2Pos.y - b1Pos.y * b1Pos.y)) / 2.0f;
 
