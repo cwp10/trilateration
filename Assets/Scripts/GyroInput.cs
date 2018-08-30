@@ -14,10 +14,10 @@ public class GyroInput : MonoBehaviour
 		_cameraContainer.transform.position = transform.position;
 		transform.SetParent(_cameraContainer.transform);
 
-		_gyroEnabled = EnableGyro();
+		_gyroEnabled = CheckGyro();
 	}
 
-	private bool EnableGyro()
+	private bool CheckGyro()
 	{
 		if(SystemInfo.supportsGyroscope)
 		{
@@ -33,17 +33,16 @@ public class GyroInput : MonoBehaviour
 
 	private void Update()
 	{
-		if(_gyroEnabled)
-		{
-			CompassInterpolation();
-			transform.localRotation = _gyro.attitude * _rot;
-		}
+		if(!_gyroEnabled) return;
+
+		UpdateRatation();
 	}
 
-	private void CompassInterpolation()
+	private void UpdateRatation()
 	{
 		Vector3 rot = this.transform.parent.localEulerAngles;
 		rot.y = Input.compass.magneticHeading;
 		this.transform.parent.localRotation = Quaternion.Lerp(this.transform.parent.localRotation, Quaternion.Euler(rot), Time.deltaTime * 5f);
+		transform.localRotation = _gyro.attitude * _rot;
 	}
 }

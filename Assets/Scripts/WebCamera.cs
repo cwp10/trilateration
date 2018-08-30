@@ -46,6 +46,11 @@ public class WebCamera : MonoBehaviour
 	{
 		if(!_camAvailable) return;
 
+		UpdateBackground();
+	}
+
+	private void UpdateBackground()
+	{
 		float ratio = (float)_backCam.width / (float)_backCam.height;
 		fit.aspectRatio = ratio;
 
